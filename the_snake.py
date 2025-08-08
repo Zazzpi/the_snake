@@ -38,33 +38,56 @@ pygame.display.set_caption('Змейка')
 # Настройка времени:
 clock = pygame.time.Clock()
 
+# Материнский класс объектов
+class GameObject():
+    def __init__(self, position) -> None:
+        self.position = position
+        self.body_color = None
 
-# Тут опишите все классы игры.
-...
+    def draw(self):
+        pass
+# Класс яблоки
 
+class Apple(GameObject):
+    def __init__(self):
+        super().__init__()
+        self.body_color = SNAKE_COLOR
+        self.position = 
+
+    def randomize_position(self):
+        random_x = randint(0, SCREEN_WIDTH, GRID_SIZE)
+        random_y = randint(0, SCREEN_HEIGHT, GRID_SIZE)
+        self.position = (random_x, random_y)
+    # Метод draw класса Apple
+
+    def draw(self):
+        rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
+        pygame.draw.rect(screen, self.body_color, rect)
+        pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+
+class Sake(GameObject):
+    pass
 
 def main():
     # Инициализация PyGame:
     pygame.init()
     # Тут нужно создать экземпляры классов.
-    ...
+    apple = Apple()
+    snake = Snake()
 
-    # while True:
-    #     clock.tick(SPEED)
+    while True:
+        clock.tick(SPEED)
+        apple.draw()
+        pygame.display.update()
 
-        # Тут опишите основную логику игры.
-        # ...
+    
 
 
 if __name__ == '__main__':
     main()
 
 
-# Метод draw класса Apple
-# def draw(self):
-#     rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
-#     pygame.draw.rect(screen, self.body_color, rect)
-#     pygame.draw.rect(screen, BORDER_COLOR, rect, 1)
+
 
 # # Метод draw класса Snake
 # def draw(self):
