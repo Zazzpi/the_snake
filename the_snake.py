@@ -45,7 +45,7 @@ class GameObject:
 class Apple(GameObject):
     """Класс яблока, которое змейка должна съесть."""
 
-    def __init__(self) -> None:
+    def __init__(self):
         """Инициализация яблока с рандомной позицией и цветом."""
         super().__init__()
         self.body_color = APPLE_COLOR
@@ -57,7 +57,7 @@ class Apple(GameObject):
         random_y = random.randint(0, GRID_HEIGHT - 1) * GRID_SIZE
         self.position = (random_x, random_y)
 
-    def draw(self) -> None:
+    def draw(self):
         """Отрисовка яблока на экране."""
         rect = pygame.Rect(self.position, (GRID_SIZE, GRID_SIZE))
         pygame.draw.rect(screen, self.body_color, rect)
@@ -71,7 +71,7 @@ class Snake(GameObject):
         """Инициализация змейки и её состояния."""
         self._init_state()
 
-    def _init_state(self) -> None:
+    def _init_state(self):
         """Устанавливает начальное состояние змейки."""
         start_x = (SCREEN_WIDTH // 2) // GRID_SIZE * GRID_SIZE
         start_y = (SCREEN_HEIGHT // 2) // GRID_SIZE * GRID_SIZE
@@ -117,7 +117,7 @@ class Snake(GameObject):
             self.direction = self.next_direction
             self.next_direction = None
 
-    def draw(self) -> None:
+    def draw(self):
         """Отрисовывает змейку на экране."""
         # Тело змейки без головы
         for position in self.positions[1:]:
