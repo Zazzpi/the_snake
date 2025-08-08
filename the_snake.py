@@ -88,8 +88,10 @@ class Snake(GameObject):
         self.flag = False  # Флаг съедения яблока
 
     def move(self) -> None:
-        """Обновляет позицию змейки, добавляя новую голову и
-        убирая хвост, если нужно."""
+        """
+        Обновляет позицию змейки, добавляя новую голову и
+        убирая хвост, если нужно.
+        """
         first_x, first_y = self.positions[0]
         delta_x, delta_y = self.direction
         new_head = (
