@@ -34,7 +34,7 @@ class GameObject:
     """Базовый класс для игровых объектов."""
 
     def __init__(self, body_color=None) -> None:
-        """Иницилизауия объекта по центру экрана."""
+        """Инициализация объекта по центру экрана."""
         self.position = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
         self.body_color = body_color
 
@@ -45,11 +45,11 @@ class GameObject:
         pg.draw.rect(screen, BORDER_COLOR, rect, 1)
 
     def draw(self):
-        """отрисовка"""
+        """Отрисовка."""
 
 
 class Apple(GameObject):
-    """Класс яблока, которое змейка должна  съесть."""
+    """Класс яблока, которое змейка должна съесть."""
 
     def __init__(self, closed=None):
         """Инициализация яблока с рандомной позицией и цветом."""
@@ -106,8 +106,7 @@ class Snake(GameObject):
         self.positions.insert(0, new_head)
 
         if not self.flag:
-            removed = self.positions.pop()
-            return removed
+            return self.positions.pop()
         else:
             self.flag = False
             return None
@@ -131,7 +130,7 @@ class Snake(GameObject):
         return self.positions[0]
 
     def reset(self) -> None:
-        """Сброс змеи в начальное состояние."""
+        """Сброс змейки в начальное состояние."""
         self._init_state()
 
 
@@ -170,13 +169,13 @@ def handle_keys(game_object: Snake) -> None:
         if event.key in valid_keys:
             new_dir = direction_changes.get(
                 (event.key, game_object.direction),
-                game_object.direction
+                game_object.direction,
             )
             game_object.next_direction = new_dir
 
 
 def main() -> None:
-    """Главная фукция."""
+    """Главная функция."""
     pg.init()
     snake = Snake()
     apple = Apple(closed=snake.positions)
