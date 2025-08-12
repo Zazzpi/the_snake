@@ -153,6 +153,7 @@ def handle_keys(game_object: Snake) -> None:
         (pg.K_RIGHT, LEFT): LEFT,
     }
 
+
     valid_keys = {key for key, _ in direction_changes.keys()}
     # Guard block
     for event in pg.event.get():
