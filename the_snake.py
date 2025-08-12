@@ -153,7 +153,6 @@ def handle_keys(game_object: Snake) -> None:
         (pg.K_RIGHT, LEFT): LEFT,
     }
 
-
     valid_keys = {key for key, _ in direction_changes.keys()}
     # Guard block
     for event in pg.event.get():
@@ -177,6 +176,7 @@ def handle_keys(game_object: Snake) -> None:
 
 
 def main() -> None:
+    """Главная фукция."""
     pg.init()
     snake = Snake()
     apple = Apple(closed=snake.positions)
@@ -185,7 +185,6 @@ def main() -> None:
 
     while True:
         clock.tick(SPEED)
-
         handle_keys(snake)
         snake.update_direction()
 
