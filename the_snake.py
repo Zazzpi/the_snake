@@ -1,5 +1,6 @@
 import random
 
+
 import pygame as pg
 
 # Константы для размеров поля и сетки:
@@ -214,7 +215,6 @@ def main() -> None:
         snake.draw()
 
         pg.display.update()
-
 
 
 if __name__ == '__main__':
