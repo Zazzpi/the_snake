@@ -53,7 +53,7 @@ class Apple(GameObject):
 
     def __init__(self, body_color=APPLE_COLOR, closed=None):
         """Инициализация яблока с рандомной позицией и цветом."""
-        super().__init__(body_color)  # передаём цвет в родительский конструктор
+        super().__init__(body_color)
         self.randomize_position(closed)
 
     def randomize_position(self, closed=None) -> None:
