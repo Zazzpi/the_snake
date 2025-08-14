@@ -51,10 +51,9 @@ class GameObject:
 class Apple(GameObject):
     """Класс яблока, которое змейка должна съесть."""
 
-    def __init__(self, closed=None):
+    def __init__(self, body_color=APPLE_COLOR, closed=None):
         """Инициализация яблока с рандомной позицией и цветом."""
-        super().__init__()
-        self.body_color = APPLE_COLOR
+        super().__init__(body_color)  # передаём цвет в родительский конструктор
         self.randomize_position(closed)
 
     def randomize_position(self, closed=None) -> None:
@@ -75,9 +74,9 @@ class Apple(GameObject):
 class Snake(GameObject):
     """Класс змейки."""
 
-    def __init__(self) -> None:
+    def __init__(self, body_color=SNAKE_COLOR) -> None:
         # Задаём цвет змейки по умолчанию при вызове родителя
-        super().__init__(body_color=SNAKE_COLOR)
+        super().__init__(body_color)
         self._init_state()
 
     def _init_state(self):
@@ -117,8 +116,12 @@ class Snake(GameObject):
             self.direction = self.next_direction
             self.next_direction = None
 
-    def draw(self):
-        """Отрисовывает змейку на экране."""
+    def draw(self, tail_to_clear=None):
+        """Отрисовывает змейку на экране и очищает хвост, если нужно."""
+        if tail_to_clear:
+            rect = pg.Rect(tail_to_clear, (GRID_SIZE, GRID_SIZE))
+            pg.draw.rect(screen, BOARD_BACKGROUND_COLOR, rect)
+
         # Голова
         self.draw_rect(self.get_head_position())
         # Тело
@@ -197,21 +200,16 @@ def main() -> None:
             needs_full_redraw = True  # Полная очистка при сбросе
 
         # Проверка поедания яблока
-        if snake.get_head_position() == apple.position:
+        elif snake.get_head_position() == apple.position:
             snake.flag = True
             apple.randomize_position(snake.positions)
 
         if needs_full_redraw:
             screen.fill(BOARD_BACKGROUND_COLOR)
             needs_full_redraw = False
-        else:
-            # Очистка только области, где был хвост змейки
-            if tail_to_clear:
-                rect = pg.Rect(tail_to_clear, (GRID_SIZE, GRID_SIZE))
-                pg.draw.rect(screen, BOARD_BACKGROUND_COLOR, rect)
 
         apple.draw()
-        snake.draw()
+        snake.draw(tail_to_clear)
 
         pg.display.update()
 
