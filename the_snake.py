@@ -76,7 +76,7 @@ class Snake(GameObject):
 
     def __init__(self, body_color=SNAKE_COLOR) -> None:
         """СИнициализация змеи."""
-        # Задаём цвет змейки по умолчанию при вызове родителя
+        # Задаём цвет
         super().__init__(body_color)
         self._init_state()
 
